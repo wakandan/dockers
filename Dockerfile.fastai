@@ -1,3 +1,14 @@
 FROM ufoym/deepo:all-jupyter-py36-cu90
 
-RUN pip install jupyterlab fastai
+RUN apt-get update
+
+RUN apt-get install unzip
+
+RUN pip install jupyterlab fastai bcolz seaborn sklearn_pandas isoweek pandas_summary torchtext
+
+COPY run-jupyter-lab.sh /fastai/run-jupyter-lab.sh
+
+WORKDIR /fastai
+
+ENTRYPOINT ["/fastai/run-jupyter-lab.sh"]
+
